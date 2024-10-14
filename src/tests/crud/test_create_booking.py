@@ -1,6 +1,5 @@
-import pytest
 import allure
-
+import pytest
 from src.helpers.api_requests_wrapper import post_request
 from src.constants.api_constants import APIConstants
 from src.helpers.payload_manager import payload_create_booking
@@ -8,9 +7,7 @@ from src.helpers.common_verification import *
 from src.utils.utils import Utils
 import logging
 
-
 class TestCreateBooking(object):
-
     @pytest.mark.positive
     @allure.title("Verify that Create Booking Status and Booking ID shouldn't be null")
     @allure.description(
@@ -26,21 +23,21 @@ class TestCreateBooking(object):
             in_json=False
         )
         verify_http_status_code(response_data=response, expected_data=200)
-        verify_json_key_for_not_null(response.json()["booking_id"])
-        LOGGER.info(response.json()["booking_id"])
+        verify_json_key_for_not_null(response.json()["bookingid"])
+        LOGGER.info(response.json()["bookingid"])
         LOGGER.info("End of the Testcase TC1 -positive")
 
     @pytest.mark.negative
     @allure.title("Verify that Create Booking doesn't work with no payload")
-    @allure.description("Creating a Booking with no payload and verify that booking id")
-
+    @allure.description(
+        "Creating a Booking with no payload and verify that booking id")
     def test_create_booking_negative(self):
-            LOGGER = logging.getLogger(__name__)
-            response = post_request(
-                url=APIConstants().url_create_booking(),
-                auth=None,
-                headers=Utils().common_headers_json(),
-                payload={},
-                in_json=False
-            )
-            verify_http_status_code(response_data=response, expected_data=500)
+        LOGGER = logging.getLogger(__name__)
+        response = post_request(
+            url=APIConstants().url_create_booking(),
+            auth=None,
+            headers=Utils().common_headers_json(),
+            payload={},
+            in_json=False
+        )
+        verify_http_status_code(response_data=response, expected_data=500)
