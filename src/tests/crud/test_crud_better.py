@@ -17,6 +17,7 @@ from src.helpers.payload_manager import *
 from src.utils.utils import Utils
 
 
+
 class TestCRUDBooking(object):
     @pytest.mark.put
     @allure.title("Test CRUD operation Update(PUT).")
